@@ -24,3 +24,438 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Modern, Clean Portfolio Styles */
+:root {
+    --primary: #2563eb;       /* More vibrant blue */
+    --secondary: #7c3aed;     /* Purple accent */
+    --light-bg: #f9fafb;      /* Very light gray background */
+    --card-bg: #ffffff;       /* Pure white cards */
+    --text: #1f2937;          /* Dark gray for text */
+    --text-light: #6b7280;    /* Medium gray */
+    --border: #e5e7eb;       /* Light border color */
+}
+
+/* Base Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+#toast-root {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-12px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#toast-root.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 260px;
+    max-width: min(360px, calc(100vw - 32px));
+    padding: 14px 18px;
+    border: 1px solid rgba(34, 197, 94, 0.28);
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.94);
+    color: #f8fafc;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.22);
+    backdrop-filter: blur(12px);
+}
+
+.toast-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: rgba(34, 197, 94, 0.18);
+    color: #86efac;
+    flex-shrink: 0;
+}
+
+.toast-message {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+    background: linear-gradient(135deg, rgba(249, 250, 251, 0.78) 0%, rgba(229, 231, 235, 0.72) 100%);
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(6px);
+}
+
+.profile-container {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    border: 5px solid white;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.tagline {
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.82);
+    margin-bottom: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+}
+
+nav a {
+    margin: 0 1.5rem;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+/* Main Content */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--primary);
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+/* Cards */
+.card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.company, .degree, .tech {
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+li {
+    margin-bottom: 0.75rem;
+    line-height: 1.7;
+}
+
+/* About Section */
+.about-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.about-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-content p {
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.skills {
+    flex: 1;
+    min-width: 300px;
+}
+
+.skills h3 {
+    margin-bottom: 1.25rem;
+}
+
+.skills ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+    padding-left: 0;
+}
+
+.skills li {
+    background: #f3f4f6;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* Contact Section */
+.contact-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    padding: 2.5rem;
+    align-items: flex-start;
+}
+
+.contact-methods {
+    flex: 1;
+    min-width: 250px;
+}
+
+.contact-form {
+    flex: 1;
+    min-width: 250px;
+    max-width: 720px;
+}
+
+.contact-subheading {
+    font-size: 1.4rem;
+    margin-bottom: 1.75rem;
+    color: var(--text);
+    min-height: 3.2rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.contact-item i {
+    font-size: 1.3rem;
+    color: var(--primary);
+    width: 40px;
+    text-align: center;
+}
+
+.contact-item a, .contact-item span {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1.05rem;
+}
+
+.contact-item a:hover {
+    color: var(--primary);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+/* Project Links */
+.project-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.05rem;
+}
+
+.project-link:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.86);
+    border-top: 1px solid var(--border);
+    color: var(--text-light);
+    backdrop-filter: blur(8px);
+}
+
+.social-links {
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: var(--text-light);
+    margin: 0 0.75rem;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary);
+}
+
+/* Quantum Canvas */
+#quantumCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.16;
+    pointer-events: none;
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-wrap: wrap;
+    }
+    
+    nav a {
+        margin: 0.5rem;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+    
+    .contact-card {
+        padding: 1.5rem;
+    }
+    
+    header {
+        padding: 3rem 1rem 1.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    #toast-root {
+        top: 16px;
+        right: 16px;
+        left: 16px;
+    }
+
+    .toast {
+        min-width: 0;
+        max-width: 100%;
+    }
+}
