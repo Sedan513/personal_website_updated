@@ -35,9 +35,9 @@ export default function HomePage() {
             <div className="card about-card">
               <div className="about-content">
                 <p>
-                  I&apos;m a multidisciplinary student at Johns Hopkins University
+                  Student at Johns Hopkins University
                   pursuing degrees in Computer Science, Physics, and Applied
-                  Mathematics &amp; Statistics. My passion lies at the intersection
+                  Mathematics &amp; Statistics. My interests lies at the intersection
                   of quantum computing, machine learning, and software engineering.
                 </p>
                 <p>
@@ -79,8 +79,9 @@ export default function HomePage() {
                 Statistics
               </p>
               <ul>
+                <li>Relevant Coursework: Operating Systems, Computer Networks, Data Structures and Algorithms, Deep Learning, Probability, Statistics, Quantum Mechanics 1 and 2</li>
                 <li>Vice President, Alpha Epsilon Pi Fraternity</li>
-                <li>Member, iBailai Latin Dance Team</li>
+                <li>Member, Baila: Latin Dance Team</li>
               </ul>
             </div>
           </section>
@@ -192,27 +193,31 @@ export default function HomePage() {
 
                 <div className="card">
               <h3>PotLock - Crypto-based treasury for groups</h3>
-              <p className="tech">MongoDB, React, Node.js, Google Gemini API</p>
+              <p className="tech">Solana, Anchor, Rust, React, TypeScript, Convex, Google Gemini API, Phantom, JWT, OpenID Connect, Mastra AI</p>
               <ul>
                 <li>
-                  Potlock is a shared treasury app that lets trusted groups pool money, create rules together, and vote on spending requests with their Solana wallets.
+                                Built a Solana-based group treasury dApp end-to-end at a hackathon, implementing a
+                  669-line Anchor (Rust) smart contract with a doubly-linked on-chain contract version   
+                  history, k-of-n multi-sig approval logic, and four proposal types (spending, add    
+                  member, amend contract, switch contract) — enabling trustless fund management for      
+                  groups without a single point of control    
                 </li>
                 <li>
-                  Aggregated and processed financial data from SEC filings (10-K,
-                  10-Q, 8-K, etc.), real-time news sources, and multiple
-                  financial APIs
+                  Designed a full-stack governance workflow using React 19, TypeScript, Convex         
+                    (real-time off-chain DB), and the Google Gemini API to convert plain-language group    
+                    rules into structured contract JSON, validate proposed transactions against active     
+                    contracts, and gate on-chain SOL transfers behind Convex-tracked member votes and      
+                    approval thresholds   
                 </li>
                 <li>
-                  Integrated Google&apos;s Gemini API to perform sentiment
-                  analysis and understanding on complex financial documents
-                </li>
-                <li>
-                  Utilized a React front end alongside a Node.js backend hosted on
-                  MongoDB Atlas for scalable data storage and a seamless UX
+                  Implemented wallet-signature-based authentication using Solana's                     
+                    @solana/wallet-adapter-react with a nonce challenge-response flow and JWT session      
+                    tokens, integrating Phantom wallet sign-in, OpenID Connect endpoints, and a Mastra AI  
+                    validation pipeline for optional URL verification on transaction proposals
                 </li>
               </ul>
               <a
-                href="https://devpost.com/software/accessinvest"
+                href="https://devpost.com/software/potlock"
                 className="project-link"
                 target="_blank"
                 rel="noreferrer"
@@ -220,24 +225,11 @@ export default function HomePage() {
                 View Project →
               </a>
               <a
-                href="https://github.com/Sedan513/AccessInvest"
+                href="https://github.com/arosen64/potlock"
                 className="project-link"
                 target="_blank"
                 rel="noreferrer"
-              >Built a Solana-based group treasury dApp end-to-end at a hackathon, implementing a
-  669-line Anchor (Rust) smart contract with a doubly-linked on-chain contract version   
-  history, k-of-n multi-sig approval logic, and four proposal types (spending, add    
-  member, amend contract, switch contract) — enabling trustless fund management for      
-  groups without a single point of control                                            
-  - Designed a full-stack governance workflow using React 19, TypeScript, Convex         
-  (real-time off-chain DB), and the Google Gemini API to convert plain-language group    
-  rules into structured contract JSON, validate proposed transactions against active     
-  contracts, and gate on-chain SOL transfers behind Convex-tracked member votes and      
-  approval thresholds                                                                    
-  - Implemented wallet-signature-based authentication using Solana's                     
-  @solana/wallet-adapter-react with a nonce challenge-response flow and JWT session      
-  tokens, integrating Phantom wallet sign-in, OpenID Connect endpoints, and a Mastra AI  
-  validation pipeline for optional URL verification on transaction proposals
+              >                                                                                                         
                 GitHub Repo →
               </a>
             </div>
