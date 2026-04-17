@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { useActionState, useEffect, useMemo, useState } from "react";
 
 type EmailJsConfig = {
   publicKey: string;
@@ -54,7 +54,6 @@ const isValidEmailJsConfig = (config: unknown): config is EmailJsConfig => {
 
 export default function ContactForm() {
   const [emailJsConfig, setEmailJsConfig] = useState<EmailJsConfig | null>(null);
-  const [submitState, setSubmitState] = useState<"idle" | "sending">("idle");
   const [toastMessage, setToastMessage] = useState("");
   const [isToastVisible, setIsToastVisible] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -63,7 +62,33 @@ export default function ContactForm() {
     message: "",
   });
 
-  const isSubmitting = submitState === "sending";
+  const [, formAction, isSubmitting] = useActionState(async () => {
+    if (!window.emailjs) {
+      window.alert("Contact form is temporarily unavailable. Please email me directly.");
+      return null;
+    }
+
+    if (!emailJsConfig) {
+      window.alert("Contact form is not configured on this deployment yet. Please email me directly.");
+      return null;
+    }
+
+    try {
+      const response = await window.emailjs.send(
+        emailJsConfig.serviceId,
+        emailJsConfig.templateId,
+        formValues,
+      );
+      console.log("SUCCESS!", response.status, response.text);
+      setToastMessage("Message sent successfully.");
+      setFormValues({ from_name: "", from_email: "", message: "" });
+    } catch (error) {
+      console.log("FAILED...", error);
+      window.alert("Failed to send message. Please try again.");
+    }
+
+    return null;
+  }, null);
 
   const toastClassName = useMemo(
     () => (isToastVisible ? "is-visible" : ""),
@@ -141,43 +166,6 @@ export default function ContactForm() {
     };
   }, [toastMessage]);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!window.emailjs) {
-      window.alert("Contact form is temporarily unavailable. Please email me directly.");
-      return;
-    }
-
-    if (!emailJsConfig) {
-      window.alert("Contact form is not configured on this deployment yet. Please email me directly.");
-      return;
-    }
-
-    setSubmitState("sending");
-
-    try {
-      const response = await window.emailjs.send(
-        emailJsConfig.serviceId,
-        emailJsConfig.templateId,
-        formValues,
-      );
-
-      console.log("SUCCESS!", response.status, response.text);
-      setToastMessage("Message sent successfully.");
-      setFormValues({
-        from_name: "",
-        from_email: "",
-        message: "",
-      });
-    } catch (error) {
-      console.log("FAILED...", error);
-      window.alert("Failed to send message. Please try again.");
-    } finally {
-      setSubmitState("idle");
-    }
-  };
-
   return (
     <>
       <div id="toast-root" className={toastClassName} aria-live="polite" aria-atomic="true">
@@ -191,7 +179,7 @@ export default function ContactForm() {
         ) : null}
       </div>
 
-      <form id="contact-form" className="contact-form" onSubmit={handleSubmit}>
+      <form id="contact-form" className="contact-form" action={formAction}>
         <h3 className="contact-subheading">Send Me a Message</h3>
 
         <div className="form-group">
