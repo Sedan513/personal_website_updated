@@ -1,5 +1,6 @@
 "use client";
 
+import Script from "next/script";
 import { useActionState, useEffect, useMemo, useState } from "react";
 
 type EmailJsConfig = {
@@ -95,47 +96,33 @@ export default function ContactForm() {
     [isToastVisible],
   );
 
-  useEffect(() => {
-    const initializeEmailJs = async () => {
-      if (!window.emailjs) {
-        console.warn("EmailJS SDK is not available on the window object");
-        //console.error("EmailJS SDK failed to load");
-        return;
-      }
+  const handleEmailJsLoad = async () => {
+    if (!window.emailjs) return;
 
-      const inlineConfig = window.EMAILJS_CONFIG;
-      if (isValidEmailJsConfig(inlineConfig)) {
-        window.emailjs.init(inlineConfig.publicKey);
-        setEmailJsConfig(inlineConfig);
-        return;
-      }
+    const inlineConfig = window.EMAILJS_CONFIG;
+    if (isValidEmailJsConfig(inlineConfig)) {
+      window.emailjs.init(inlineConfig.publicKey);
+      setEmailJsConfig(inlineConfig);
+      return;
+    }
 
-      try {
-        const response = await fetch("/api/config");
-        if (!response.ok) {
-          throw new Error(`Config endpoint returned ${response.status}`);
-        }
+    try {
+      const response = await fetch("/api/config");
+      if (!response.ok) throw new Error(`Config endpoint returned ${response.status}`);
 
-        const contentType = response.headers.get("content-type") || "";
-        if (!contentType.includes("application/json")) {
-          throw new Error("Config endpoint did not return JSON");
-        }
+      const contentType = response.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) throw new Error("Config endpoint did not return JSON");
 
-        const config = await response.json();
-        if (!isValidEmailJsConfig(config)) {
-          throw new Error("Missing contact form configuration");
-        }
+      const config = await response.json();
+      if (!isValidEmailJsConfig(config)) throw new Error("Missing contact form configuration");
 
-        window.emailjs.init(config.publicKey);
-        setEmailJsConfig(config);
-      } catch (error) {
-        const message = error instanceof Error ? error.message : "Unknown error";
-        console.warn("Skipping server config for contact form:", message);
-      }
-    };
-
-    initializeEmailJs();
-  }, []);
+      window.emailjs.init(config.publicKey);
+      setEmailJsConfig(config);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown error";
+      console.warn("Skipping server config for contact form:", message);
+    }
+  };
 
   useEffect(() => {
     let toastTimeoutId: number | undefined;
@@ -168,6 +155,11 @@ export default function ContactForm() {
 
   return (
     <>
+      <Script
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+        strategy="afterInteractive"
+        onLoad={handleEmailJsLoad}
+      />
       <div id="toast-root" className={toastClassName} aria-live="polite" aria-atomic="true">
         {toastMessage ? (
           <div className="toast toast-success" role="status">
