@@ -393,7 +393,7 @@ export default function HomePage() {
         </main>
 
         <footer>
-          <p>© 2023 Sebastian Rincon Camacho. All rights reserved.</p>
+          <p>© 2026 Sebastian Rincon Camacho. All rights reserved.</p>
           <div className="social-links">
             <a
               href="https://linkedin.com/in/sebas-rincon"
