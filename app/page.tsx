@@ -354,8 +354,8 @@ export default function HomePage() {
                 <h3 className="contact-subheading">Contact and Socials</h3>
                 <div className="contact-item">
                   <i className="fas fa-envelope" />
-                  <a href="mailto:sebastianrincon04@gmail.com">
-                    sebastianrincon04@gmail.com
+                  <a href="mailto:srinconcam@gmail.com">
+                    srinconcam@gmail.com
                   </a>
                 </div>
                 <div className="contact-item">
